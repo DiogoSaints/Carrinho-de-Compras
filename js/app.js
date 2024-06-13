@@ -13,6 +13,7 @@ function adicionar() {
         alert('Por favor, insira uma quantidade válida.');
         return;
     }
+    
 
     const preco = quantidade * valorunitario;
 
