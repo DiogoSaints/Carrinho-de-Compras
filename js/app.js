@@ -1,7 +1,6 @@
 const itemList = [];
 
-let total = itemList.preco
-
+let totalGeral = 0; // Inicializa a variável totalGeral
 
 function adicionar() {
     const produto = document.getElementById('produto').value;
@@ -14,7 +13,6 @@ function adicionar() {
         return;
     }
     
-
     const preco = quantidade * valorunitario;
 
     // Adiciona o item ao array
@@ -37,14 +35,28 @@ function adicionar() {
             <span class="texto-azul">R$${item.preco.toFixed(2)}</span>
         </section>`;
     });
+
+    // Atualiza o total geral
+    totalGeral = itemList.reduce((acc, item) => acc + item.preco, 0);
+
+    // Atualiza o campo do valor total
+    let campoTotal = document.getElementById('valor-total');
+    campoTotal.textContent = `R$ ${totalGeral.toFixed(2)}`;
+    document.getElementById('quantidade').value = 0;
 }
-
-
-
 
 
 function limpar() {
     document.getElementById('produto').value = '';
     document.getElementById('quantidade').value = '';
-    document.getElementById('result').innerHTML = '';
+    
+    itemList.length = 0;
+    
+    totalGeral = 0;
+
+    const resultDiv = document.getElementById('lista-produtos');
+    resultDiv.innerHTML = '';
+    
+    let campoTotal = document.getElementById('valor-total');
+    campoTotal.textContent = 'R$ 0.00';
 }
